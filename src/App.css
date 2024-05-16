@@ -1,0 +1,22 @@
+.fraction {
+  display: inline-block;
+  text-align: center;
+  position: relative;
+}
+
+.fraction,
+.fraction-top,
+.fraction-bottom {
+  padding: 0 5px;
+}
+
+.fraction-whole {
+  position: absolute;
+  top: 25%;
+  left: -25%;
+}
+
+.fraction-bottom {
+  border-top: 1px solid #888;
+  display: block;
+}
