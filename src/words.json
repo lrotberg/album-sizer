@@ -4,5 +4,11 @@
   "standardSize": "סטנדרטי (4X6)",
   "smallSize": "קטן (3.5X5)",
   "submit": "שלח",
-  "required": "שדה חובה"
+  "required": "שדה חובה",
+  "pageSizeExplanation": "יש לכתוב מספר בין 4 ל 11, עבור שברים יש לכתוב ראשית את המספר השלום ואז רווח, ואז את השבר כולל '/', כמו בדוגמה",
+  "height": "גובה",
+  "width": "רוחב",
+  "pageOrientationLabel": "בחר כיוון עמוד, עומד או שוכב",
+  "vertical": "עומד",
+  "horizontal": "שוכב"
 }
