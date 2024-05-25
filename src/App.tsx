@@ -7,11 +7,11 @@ function App() {
   // return <Fraction top={top} bottom={bottom} wholeNumber={wholeNumber} />;
   return (
     <Grid placeItems="center" templateAreas={"left form right"} color="blackAlpha.700" dir="rtl">
-      <GridItem id="left" w="100%" h="100%" colSpan={2} bg="gray.100" area={"left"} />
+      <GridItem id="left" w="100%" h="100%" colSpan={3} bg="gray.100" area={"left"} />
       <GridItem
         id="form"
         w="100%"
-        colSpan={8}
+        colSpan={6}
         area={"form"}
         borderStart={"2px solid"}
         borderStartColor={"gray.300"}
@@ -20,7 +20,7 @@ function App() {
       >
         <MainForm />
       </GridItem>
-      <GridItem id="right" w="100%" h="100%" colSpan={2} bg="gray.100" area={"right"} />
+      <GridItem id="right" w="100%" h="100%" colSpan={3} bg="gray.100" area={"right"} />
     </Grid>
   );
 }
