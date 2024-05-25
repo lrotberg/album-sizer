@@ -24,3 +24,10 @@ export const createFraction = (fraction: number) => {
     wholeNumber
   }
 }
+
+export const parseFloatFromFractionString = (fractionString: string): number => {
+  const [whole, fraction] = fractionString.split(" ")
+  if (!fraction) return parseFloat(whole)
+  const [nominator, denominator] = fraction.split("/")
+  return parseFloat(whole) + parseFloat(nominator) / parseFloat(denominator)
+}
