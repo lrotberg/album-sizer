@@ -11,8 +11,10 @@ import {
   Select,
   VStack
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
+import { parseFloatFromFractionString } from "../helperFunctions";
+import { Page, Photo } from "../interfaces";
 import words from "../words.json";
 import FormLabel from "./FormLabel";
 
@@ -31,14 +33,41 @@ const MainForm = () => {
     formState: { errors }
   } = useForm<FormData>();
 
+  const [imageSize, setImageSize] = useState<Photo>({ size: { width: 0, height: 0 } });
+  const [pageSize, setPageSize] = useState<Page>({ size: { width: 0, height: 0 } });
+  const [pageWidth, setPageWidth] = useState<number>(0);
+  const [pageHeight, setPageHeight] = useState<number>(0);
   const [orientation, setOrientation] = useState<"vertical" | "horizontal">("horizontal");
+
+  const handleImageSizeChange = (value: "standard" | "small") => {
+    if (value === "standard") {
+      setImageSize({ size: { width: 4, height: 6 } });
+    } else {
+      setImageSize({ size: { width: 3.5, height: 5 } });
+    }
+  };
+
+  //!FIXME: Page size is updating only after the second submit, state change reqire a rerender
+  const handlePageSizeChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    const { name, value } = e.target;
+    const numberValue = parseFloatFromFractionString(value);
+
+    if (name === "height") {
+      setPageHeight(numberValue);
+    } else {
+      setPageWidth(numberValue);
+    }
+  };
 
   const handleOrientationChange = (value: "vertical" | "horizontal") => {
     setOrientation(value);
   };
 
   const onSubmit = (data: FieldValues) => {
-    console.log(data);
+    setPageSize({ size: { width: pageWidth, height: pageHeight } });
+    console.log(data, imageSize, pageSize, orientation);
   };
 
   const setOrientationInput = (registerValue: "height" | "width") => {
@@ -56,7 +85,7 @@ const MainForm = () => {
         <VStack>
           <FormControl isInvalid={errors.imageSize?.type === "required"}>
             <FormLabel htmlFor="imageSize" text={words.imageSizeLabel} />
-            <RadioGroup id="imageSize">
+            <RadioGroup id="imageSize" onChange={handleImageSizeChange}>
               <HStack>
                 <Radio value="standard" {...register("imageSize", { required: true })}>
                   {words.standardSize}
@@ -118,7 +147,11 @@ const MainForm = () => {
               <FormHelperText>{words.pageSizeExplanation}</FormHelperText>
               <HStack>
                 <FormLabel htmlFor="width" text={words.width} />
-                <Input id="width" {...setOrientationInput("width")} />
+                <Input
+                  id="width"
+                  {...setOrientationInput("width")}
+                  onChange={handlePageSizeChange}
+                />
                 {errors.width?.type === "required" && (
                   <FormErrorMessage>{words.required}</FormErrorMessage>
                 )}
@@ -132,7 +165,11 @@ const MainForm = () => {
 
                 <VStack justifyContent={"center"}>
                   <FormLabel htmlFor="height" text={words.height} />
-                  <Input id="height" {...setOrientationInput("height")} />
+                  <Input
+                    id="height"
+                    {...setOrientationInput("height")}
+                    onChange={handlePageSizeChange}
+                  />
                   {errors.height?.type === "required" && (
                     <FormErrorMessage>{words.required}</FormErrorMessage>
                   )}
