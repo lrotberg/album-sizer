@@ -31,7 +31,7 @@ const MainForm = () => {
     formState: { errors }
   } = useForm<FormData>();
 
-  const [orientation, setOrientation] = useState<"vertical" | "horizontal">("vertical");
+  const [orientation, setOrientation] = useState<"vertical" | "horizontal">("horizontal");
 
   const handleOrientationChange = (value: "vertical" | "horizontal") => {
     setOrientation(value);
@@ -95,15 +95,15 @@ const MainForm = () => {
             <FormLabel htmlFor="pageOrientation" text={words.pageOrientationLabel} />
             <RadioGroup
               id="pageOrientation"
-              defaultValue="vertical"
+              defaultValue="horizontal"
               onChange={handleOrientationChange}
             >
               <HStack>
-                <Radio value="vertical" {...register("orientation", { required: true })}>
-                  {words.vertical}
-                </Radio>
                 <Radio value="horizontal" {...register("orientation", { required: true })}>
                   {words.horizontal}
+                </Radio>
+                <Radio value="vertical" {...register("orientation", { required: true })}>
+                  {words.vertical}
                 </Radio>
               </HStack>
             </RadioGroup>
@@ -124,10 +124,10 @@ const MainForm = () => {
                 )}
               </HStack>
               <HStack>
-                {orientation === "vertical" ? (
-                  <Box h="120px" w="80px" bg={"gray.300"} border={"1px"} borderColor={"gray.400"} />
-                ) : (
+                {orientation === "horizontal" ? (
                   <Box h="80px" w="120px" bg={"gray.300"} border={"1px"} borderColor={"gray.400"} />
+                ) : (
+                  <Box h="120px" w="80px" bg={"gray.300"} border={"1px"} borderColor={"gray.400"} />
                 )}
 
                 <VStack justifyContent={"center"}>
