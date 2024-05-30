@@ -35,8 +35,6 @@ const MainForm = () => {
 
   const [imageSize, setImageSize] = useState<Photo>({ size: { width: 0, height: 0 } });
   const [pageSize, setPageSize] = useState<Page>({ size: { width: 0, height: 0 } });
-  const [pageWidth, setPageWidth] = useState<number>(0);
-  const [pageHeight, setPageHeight] = useState<number>(0);
   const [orientation, setOrientation] = useState<"vertical" | "horizontal">("horizontal");
 
   const handleImageSizeChange = (value: "standard" | "small") => {
@@ -47,7 +45,6 @@ const MainForm = () => {
     }
   };
 
-  //!FIXME: Page size is updating only after the second submit, state change reqire a rerender
   const handlePageSizeChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
@@ -55,9 +52,9 @@ const MainForm = () => {
     const numberValue = parseFloatFromFractionString(value);
 
     if (name === "height") {
-      setPageHeight(numberValue);
+      setPageSize({ size: { width: pageSize.size.width, height: numberValue } });
     } else {
-      setPageWidth(numberValue);
+      setPageSize({ size: { width: numberValue, height: pageSize.size.height } });
     }
   };
 
@@ -66,8 +63,7 @@ const MainForm = () => {
   };
 
   const onSubmit = (data: FieldValues) => {
-    setPageSize({ size: { width: pageWidth, height: pageHeight } });
-    console.log(data, imageSize, pageSize, orientation);
+    console.log({ data, imageSize: imageSize.size, pageSize: pageSize.size, orientation });
   };
 
   const setOrientationInput = (registerValue: "height" | "width") => {
