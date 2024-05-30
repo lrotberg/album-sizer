@@ -16,7 +16,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { parseFloatFromFractionString } from "../helperFunctions";
 import { Page, Photo } from "../interfaces";
 import words from "../words.json";
-import FormLabel from "./FormLabel";
+import CustomFormLabel from "./CustomFormLabel";
 
 interface FormData {
   imageSize: string;
@@ -80,7 +80,7 @@ const MainForm = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="object-center">
         <VStack>
           <FormControl isInvalid={errors.imageSize?.type === "required"}>
-            <FormLabel htmlFor="imageSize" text={words.imageSizeLabel} />
+            <CustomFormLabel htmlFor="imageSize" text={words.imageSizeLabel} />
             <RadioGroup id="imageSize" onChange={handleImageSizeChange}>
               <HStack>
                 <Radio value="standard" {...register("imageSize", { required: true })}>
@@ -97,7 +97,7 @@ const MainForm = () => {
           </FormControl>
           <FormControl isInvalid={errors.pageCount?.type === "required"}>
             <HStack>
-              <FormLabel htmlFor="pageCount" text={words.pageCountSelectLabel} />
+              <CustomFormLabel htmlFor="pageCount" text={words.pageCountSelectLabel} />
               <Select id="pageCount" {...register("pageCount", { required: true })} w="fit-content">
                 <option value="" defaultValue={""}></option>
                 <option value="2">2</option>
@@ -117,7 +117,7 @@ const MainForm = () => {
             )}
           </FormControl>
           <FormControl isInvalid={errors.orientation?.type === "required"}>
-            <FormLabel htmlFor="pageOrientation" text={words.pageOrientationLabel} />
+            <CustomFormLabel htmlFor="pageOrientation" text={words.pageOrientationLabel} />
             <RadioGroup
               id="pageOrientation"
               defaultValue="horizontal"
@@ -142,7 +142,7 @@ const MainForm = () => {
             <VStack align={"start"}>
               <FormHelperText>{words.pageSizeExplanation}</FormHelperText>
               <HStack>
-                <FormLabel htmlFor="width" text={words.width} />
+                <CustomFormLabel htmlFor="width" text={words.width} />
                 <Input
                   id="width"
                   {...setOrientationInput("width")}
@@ -160,7 +160,7 @@ const MainForm = () => {
                 )}
 
                 <VStack justifyContent={"center"}>
-                  <FormLabel htmlFor="height" text={words.height} />
+                  <CustomFormLabel htmlFor="height" text={words.height} />
                   <Input
                     id="height"
                     {...setOrientationInput("height")}
