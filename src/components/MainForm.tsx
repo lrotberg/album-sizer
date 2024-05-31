@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { ChangeEvent, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
+import * as openings from "../classes";
 import { parseFloatFromFractionString } from "../helperFunctions";
 import { Page, Photo } from "../interfaces";
 import words from "../words.json";
@@ -74,6 +75,15 @@ const MainForm = () => {
       ...register(registerValue, { min: 4, max: 11, required: true })
     };
   };
+
+  const sortedOpenings = Object.keys(openings)
+    .map(opening => {
+      const Opening = openings[opening as keyof typeof openings];
+      const instance = new Opening(pageSize, imageSize);
+      const name = instance.getName();
+      return { name, instance };
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <Box p={5}>
