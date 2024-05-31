@@ -1,22 +1,23 @@
 import {
   Box,
   Button,
+  Checkbox,
+  CheckboxGroup,
   FormControl,
   FormErrorMessage,
   FormHelperText,
   HStack,
   Input,
-  Radio,
-  RadioGroup,
-  Select,
+  SimpleGrid,
   VStack
 } from "@chakra-ui/react";
 import { ChangeEvent, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import * as openings from "../classes";
+import Opening from "../classes/Opening";
 import { parseFloatFromFractionString } from "../helperFunctions";
-import { Page, Photo } from "../interfaces";
-import words from "../words.json";
+import { MainFormData, Page, PageOrientation, Photo } from "../interfaces";
+import words from "../words.ts";
 import CustomFormLabel from "./CustomFormLabel";
 import OrientationRadios from "./OrientationRadios";
 import PageCountSelect from "./PageCountSelect.tsx";
@@ -33,12 +34,13 @@ const MainForm = () => {
   const [imageSize, setImageSize] = useState<Photo>({ size: { width: 0, height: 0 } });
   const [pageSize, setPageSize] = useState<Page>({ size: { width: 0, height: 0 } });
   const [orientation, setOrientation] = useState<PageOrientation>("horizontal");
+  const [checkboxes, setCheckboxes] = useState<string[]>([]);
 
-  const handleImageSizeChange = (value: "standard" | "small") => {
-    if (value === "standard") {
-      setImageSize({ size: { width: 4, height: 6 } });
-    } else {
-      setImageSize({ size: { width: 3.5, height: 5 } });
+  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>, instance: Opening) => {
+    if (e.target.checked) {
+      setCheckboxes([...checkboxes, instance.getName()]);
+    } else if (!e.target.checked) {
+      setCheckboxes(checkboxes.filter(checkbox => checkbox !== instance.getName()));
     }
   };
 
@@ -55,12 +57,20 @@ const MainForm = () => {
     }
   };
 
-  const handleOrientationChange = (value: "vertical" | "horizontal") => {
-    setOrientation(value);
-  };
-
   const onSubmit = (data: FieldValues) => {
-    console.log({ data, imageSize: imageSize.size, pageSize: pageSize.size, orientation });
+    const sizes = checkboxes.map(checkbox => {
+      const instance = sortedOpenings.find(opening => opening.name === checkbox)!.instance;
+      return { checkbox, height: instance.getHeight(), width: instance.getWidth() };
+    });
+    console.log({
+      data,
+      pageCount,
+      orientation,
+      imageSize: imageSize.size,
+      pageSize: pageSize.size,
+      checkboxes,
+      sizes
+    });
   };
 
   const setOrientationInput = (registerValue: "height" | "width") => {
@@ -124,6 +134,22 @@ const MainForm = () => {
                 </VStack>
               </HStack>
             </VStack>
+          </FormControl>
+          <FormControl>
+            <CheckboxGroup>
+              <SimpleGrid columns={5} spacing={3} my={2}>
+                {sortedOpenings.map(({ name, instance }) => (
+                  <Checkbox
+                    value={name}
+                    key={name}
+                    {...register("openings")}
+                    onChange={e => handleCheckboxChange(e, instance)}
+                  >
+                    {name}
+                  </Checkbox>
+                ))}
+              </SimpleGrid>
+            </CheckboxGroup>
           </FormControl>
           <FormControl>
             <Button type="submit">{words.submit}</Button>
