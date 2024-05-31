@@ -18,14 +18,7 @@ import { parseFloatFromFractionString } from "../helperFunctions";
 import { Page, Photo } from "../interfaces";
 import words from "../words.json";
 import CustomFormLabel from "./CustomFormLabel";
-
-interface FormData {
-  imageSize: string;
-  pageCount: number;
-  height: number;
-  width: number;
-  orientation: string;
-}
+import OrientationRadios from "./OrientationRadios";
 
 const MainForm = () => {
   const {
@@ -36,7 +29,7 @@ const MainForm = () => {
 
   const [imageSize, setImageSize] = useState<Photo>({ size: { width: 0, height: 0 } });
   const [pageSize, setPageSize] = useState<Page>({ size: { width: 0, height: 0 } });
-  const [orientation, setOrientation] = useState<"vertical" | "horizontal">("horizontal");
+  const [orientation, setOrientation] = useState<PageOrientation>("horizontal");
 
   const handleImageSizeChange = (value: "standard" | "small") => {
     if (value === "standard") {
@@ -89,63 +82,7 @@ const MainForm = () => {
     <Box p={5}>
       <form onSubmit={handleSubmit(onSubmit)} className="object-center">
         <VStack>
-          <FormControl isInvalid={errors.imageSize?.type === "required"}>
-            <CustomFormLabel htmlFor="imageSize" text={words.imageSizeLabel} />
-            <RadioGroup id="imageSize" onChange={handleImageSizeChange}>
-              <HStack>
-                <Radio value="standard" {...register("imageSize", { required: true })}>
-                  {words.standardSize}
-                </Radio>
-                <Radio value="small" {...register("imageSize", { required: true })}>
-                  {words.smallSize}
-                </Radio>
-              </HStack>
-            </RadioGroup>
-            {errors.imageSize?.type === "required" && (
-              <FormErrorMessage>{words.required}</FormErrorMessage>
-            )}
-          </FormControl>
-          <FormControl isInvalid={errors.pageCount?.type === "required"}>
-            <HStack>
-              <CustomFormLabel htmlFor="pageCount" text={words.pageCountSelectLabel} />
-              <Select id="pageCount" {...register("pageCount", { required: true })} w="fit-content">
-                <option value="" defaultValue={""}></option>
-                <option value="2">2</option>
-                <option value="4">4</option>
-                <option value="6">6</option>
-                <option value="8">8</option>
-                <option value="10">10</option>
-                <option value="12">12</option>
-                <option value="14">14</option>
-                <option value="16">16</option>
-                <option value="18">18</option>
-                <option value="20">20</option>
-              </Select>
-            </HStack>
-            {errors.pageCount?.type === "required" && (
-              <FormErrorMessage>{words.required}</FormErrorMessage>
-            )}
-          </FormControl>
-          <FormControl isInvalid={errors.orientation?.type === "required"}>
-            <CustomFormLabel htmlFor="pageOrientation" text={words.pageOrientationLabel} />
-            <RadioGroup
-              id="pageOrientation"
-              defaultValue="horizontal"
-              onChange={handleOrientationChange}
-            >
-              <HStack>
-                <Radio value="horizontal" {...register("orientation", { required: true })}>
-                  {words.horizontal}
-                </Radio>
-                <Radio value="vertical" {...register("orientation", { required: true })}>
-                  {words.vertical}
-                </Radio>
-              </HStack>
-            </RadioGroup>
-            {errors.orientation?.type === "required" && (
-              <FormErrorMessage>{words.required}</FormErrorMessage>
-            )}
-          </FormControl>
+          <OrientationRadios setOrientation={setOrientation} />
           <FormControl
             isInvalid={errors.height?.type === "required" || errors.width?.type === "required"}
           >

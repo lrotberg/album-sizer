@@ -10,3 +10,4 @@ export interface Photo {
 export interface Page {
   size: Size
 }
+export type PageOrientation = "horizontal" | "vertical";
