@@ -19,6 +19,7 @@ import { Page, Photo } from "../interfaces";
 import words from "../words.json";
 import CustomFormLabel from "./CustomFormLabel";
 import OrientationRadios from "./OrientationRadios";
+import PageCountSelect from "./PageCountSelect.tsx";
 import PhotoSizeRadios from "./PhotoSizeRadios";
 
 const MainForm = () => {
@@ -28,6 +29,7 @@ const MainForm = () => {
     formState: { errors }
   } = useForm<MainFormData>();
 
+  const [pageCount, setPageCount] = useState<number>(2);
   const [imageSize, setImageSize] = useState<Photo>({ size: { width: 0, height: 0 } });
   const [pageSize, setPageSize] = useState<Page>({ size: { width: 0, height: 0 } });
   const [orientation, setOrientation] = useState<PageOrientation>("horizontal");
@@ -84,6 +86,7 @@ const MainForm = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="object-center">
         <VStack>
           <PhotoSizeRadios setImageSize={setImageSize} />
+          <PageCountSelect setPageCount={setPageCount} />
           <OrientationRadios setOrientation={setOrientation} />
           <FormControl
             isInvalid={errors.height?.type === "required" || errors.width?.type === "required"}
