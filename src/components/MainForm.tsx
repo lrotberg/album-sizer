@@ -19,6 +19,7 @@ import { Page, Photo } from "../interfaces";
 import words from "../words.json";
 import CustomFormLabel from "./CustomFormLabel";
 import OrientationRadios from "./OrientationRadios";
+import PhotoSizeRadios from "./PhotoSizeRadios";
 
 const MainForm = () => {
   const {
@@ -82,6 +83,7 @@ const MainForm = () => {
     <Box p={5}>
       <form onSubmit={handleSubmit(onSubmit)} className="object-center">
         <VStack>
+          <PhotoSizeRadios setImageSize={setImageSize} />
           <OrientationRadios setOrientation={setOrientation} />
           <FormControl
             isInvalid={errors.height?.type === "required" || errors.width?.type === "required"}

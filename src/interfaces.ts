@@ -11,3 +11,5 @@ export interface Page {
   size: Size
 }
 export type PageOrientation = "horizontal" | "vertical";
+
+export type PhotoSize = "standard" | "small";
