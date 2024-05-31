@@ -31,8 +31,8 @@ const MainForm = () => {
   } = useForm<MainFormData>();
 
   const [pageCount, setPageCount] = useState<number>(2);
-  const [imageSize, setImageSize] = useState<Photo>({ size: { width: 0, height: 0 } });
-  const [pageSize, setPageSize] = useState<Page>({ size: { width: 0, height: 0 } });
+  const [photo, setPhoto] = useState<Photo>({ size: { width: 0, height: 0 } });
+  const [page, setPage] = useState<Page>({ size: { width: 0, height: 0 } });
   const [orientation, setOrientation] = useState<PageOrientation>("horizontal");
   const [checkboxes, setCheckboxes] = useState<string[]>([]);
 
@@ -51,9 +51,9 @@ const MainForm = () => {
     const numberValue = parseFloatFromFractionString(value);
 
     if (name === "height") {
-      setPageSize({ size: { width: pageSize.size.width, height: numberValue } });
+      setPage({ size: { width: page.size.width, height: numberValue } });
     } else {
-      setPageSize({ size: { width: numberValue, height: pageSize.size.height } });
+      setPage({ size: { width: numberValue, height: page.size.height } });
     }
   };
 
@@ -66,8 +66,8 @@ const MainForm = () => {
       data,
       pageCount,
       orientation,
-      imageSize: imageSize.size,
-      pageSize: pageSize.size,
+      imageSize: photo.size,
+      pageSize: page.size,
       checkboxes,
       sizes
     });
@@ -85,7 +85,7 @@ const MainForm = () => {
   const sortedOpenings = Object.keys(openings)
     .map(opening => {
       const Opening = openings[opening as keyof typeof openings];
-      const instance = new Opening(pageSize, imageSize);
+      const instance = new Opening(page, photo);
       const name = instance.getName();
       return { name, instance };
     })
@@ -95,7 +95,7 @@ const MainForm = () => {
     <Box p={5}>
       <form onSubmit={handleSubmit(onSubmit)} className="object-center">
         <VStack>
-          <PhotoSizeRadios setImageSize={setImageSize} />
+          <PhotoSizeRadios setImageSize={setPhoto} />
           <PageCountSelect setPageCount={setPageCount} />
           <OrientationRadios setOrientation={setOrientation} />
           <FormControl
