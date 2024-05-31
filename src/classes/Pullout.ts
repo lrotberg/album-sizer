@@ -1,10 +1,10 @@
 import { CommonFractions } from "../CommonFractions.enum"
 import { calc } from "../helperFunctions"
-import { PulloutName } from "../words.json"
+import words from "../words"
 import Opening from "./Opening"
 
 export class Pullout extends Opening {
-  getName = () => PulloutName
+  getName = () => words.PulloutName
 
   getHeight = () => calc(this.photo.size.height, CommonFractions.Eighth)
 

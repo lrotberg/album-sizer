@@ -1,10 +1,10 @@
 import { CommonFractions } from "../CommonFractions.enum"
 import { calc } from "../helperFunctions"
-import { EnvelopeName } from "../words.json"
+import words from "../words"
 import Opening from "./Opening"
 
 export class Envelope extends Opening {
-  getName = () => EnvelopeName
+  getName = () => words.EnvelopeName
 
   getHeight = () => calc(this.photo.size.width, 2, CommonFractions.FiveEights)
 

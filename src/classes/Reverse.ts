@@ -1,6 +1,6 @@
-import { ReverseName } from "../words.json";
+import words from "../words";
 import { Flap } from "./Flap";
 
 export class Reverse extends Flap {
-  getName = () => ReverseName;
+  getName = () => words.ReverseName;
 }

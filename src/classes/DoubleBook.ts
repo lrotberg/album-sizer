@@ -1,10 +1,10 @@
 import { CommonFractions } from "../CommonFractions.enum"
 import { calc } from "../helperFunctions"
-import { DoubleBookName } from "../words.json"
+import words from "../words"
 import Opening from "./Opening"
 
 export class DoubleBook extends Opening {
-  getName = () => DoubleBookName
+  getName = () => words.DoubleBookName
 
   getHeight = () => calc(this.page.size.height, CommonFractions.ThreeQuarters)
 

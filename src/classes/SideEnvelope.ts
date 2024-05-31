@@ -1,10 +1,10 @@
 import { CommonFractions } from "../CommonFractions.enum"
 import { calc } from "../helperFunctions"
-import { SideEnvelopeName } from "../words.json"
+import words from "../words"
 import Opening from "./Opening"
 
 export class SideEnvelope extends Opening {
-  getName = () => SideEnvelopeName
+  getName = () => words.SideEnvelopeName
 
   getHeight = () => this.page.size.height
 

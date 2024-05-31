@@ -1,4 +1,4 @@
-{
+const words = {
   "imageSizeLabel": "בחר גודל תמונה",
   "pageCountSelectLabel": "בחר מספר עמודים",
   "standardSize": "סטנדרטי (4X6)",
@@ -32,3 +32,5 @@
   "ReverseName": "רוורס",
   "StrapName": "רצועה"
 }
+
+export default words;

@@ -1,10 +1,10 @@
 import { CommonFractions } from "../CommonFractions.enum"
 import { calc } from "../helperFunctions"
-import { FullDoorName } from "../words.json"
+import words from "../words"
 import Opening from "./Opening"
 
 export class FullDoor extends Opening {
-  getName = () => FullDoorName
+  getName = () => words.FullDoorName
 
   getHeight = () => this.page.size.height
 

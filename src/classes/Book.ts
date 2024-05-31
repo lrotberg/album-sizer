@@ -1,9 +1,9 @@
 import { CommonFractions } from "../CommonFractions.enum";
 import { calc } from "../helperFunctions";
-import { BookName } from "../words.json";
+import words from "../words";
 import Opening from "./Opening";
 export class Book extends Opening {
-  getName = () => BookName;
+  getName = () => words.BookName;
 
   getHeight = () => calc(this.page.size.width, CommonFractions.FiveEights)
 

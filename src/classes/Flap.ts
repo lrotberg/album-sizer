@@ -1,10 +1,10 @@
 import { CommonFractions } from "../CommonFractions.enum"
 import { calc } from "../helperFunctions"
-import { FlapName } from "../words.json"
+import words from "../words.ts"
 import Opening from "./Opening"
 
 export class Flap extends Opening {
-  getName = () => FlapName
+  getName = () => words.FlapName
 
   getHeight = () => this.page.size.height
 
