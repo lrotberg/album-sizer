@@ -26,7 +26,7 @@ const MainForm = () => {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<FormData>();
+  } = useForm<MainFormData>();
 
   const [imageSize, setImageSize] = useState<Photo>({ size: { width: 0, height: 0 } });
   const [pageSize, setPageSize] = useState<Page>({ size: { width: 0, height: 0 } });
