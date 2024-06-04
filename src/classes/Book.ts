@@ -7,9 +7,12 @@ export class Book extends Opening {
   constructor(page: Page, photo: Photo) {
     super(page, photo)
     this.setName(words.BookName)
+    this.setDimensions({
+      part1: {
+        height1: calc(this.page.size.width, CommonFractions.FiveEights),
+        width1: calc(this.photo.size.width, CommonFractions.Eighth),
+        units1: 1
+      }
+    })
   }
-
-  getHeight = () => calc(this.page.size.width, CommonFractions.FiveEights)
-
-  getWidth = () => calc(this.photo.size.width, CommonFractions.Eighth)
 }

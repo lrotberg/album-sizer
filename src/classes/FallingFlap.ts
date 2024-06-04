@@ -8,9 +8,12 @@ export class FallingFlap extends Opening {
   constructor(page: Page, photo: Photo) {
     super(page, photo)
     this.setName(words.FallingFlapName)
+    this.setDimensions({
+      part1: {
+        height1: calc(this.photo.size.width, CommonFractions.FiveEights),
+        width1: this.page.size.width,
+        units1: 1
+      }
+    })
   }
-
-  getHeight = () => calc(this.photo.size.width, CommonFractions.FiveEights)
-
-  getWidth = () => this.page.size.width
 }

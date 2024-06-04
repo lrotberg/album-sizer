@@ -8,9 +8,15 @@ export class Closer extends Opening {
   constructor(page: Page, photo: Photo) {
     super(page, photo)
     this.setName(words.CloserName)
+    this.setDimensions(
+      {
+        part1:
+        {
+          height1: calc(this.photo.size.height, CommonFractions.Eighth),
+          width1: calc(this.photo.size.width, CommonFractions.Eighth),
+          units1: 1
+        }
+      },
+    )
   }
-
-  getHeight = () => calc(this.photo.size.height, CommonFractions.Eighth)
-
-  getWidth = () => calc(this.photo.size.width, CommonFractions.Eighth)
 }

@@ -8,10 +8,12 @@ export class DoubleBook extends Opening {
   constructor(page: Page, photo: Photo) {
     super(page, photo)
     this.setName(words.DoubleBookName)
-    this.setUnits(2)
+    this.setDimensions({
+      part1: {
+        height1: calc(this.page.size.height, CommonFractions.ThreeQuarters),
+        width1: calc(this.photo.size.width, CommonFractions.Eighth),
+        units1: 2
+      }
+    })
   }
-
-  getHeight = () => calc(this.page.size.height, CommonFractions.ThreeQuarters)
-
-  getWidth = () => calc(this.photo.size.width, CommonFractions.Eighth)
 }

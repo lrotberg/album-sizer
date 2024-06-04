@@ -6,6 +6,6 @@ export class Door extends Flap {
   constructor(page: Page, photo: Photo) {
     super(page, photo);
     this.setName(words.DoorName);
-    this.setUnits(2);
+    this.setDimensions({ part1: { ...this.getDimensions().part1, units1: 2 } })
   }
 }

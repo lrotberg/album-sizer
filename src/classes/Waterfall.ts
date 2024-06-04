@@ -8,9 +8,16 @@ export class Waterfall extends Opening {
   constructor(page: Page, photo: Photo) {
     super(page, photo)
     this.setName(words.WaterfallName)
+    this.setDimensions({
+      part1: {
+        height1: calc(this.photo.size.width, 1, CommonFractions.Eighth),
+        width1: calc(this.photo.size.height, CommonFractions.Eighth),
+        units1: 1
+      }
+    })
   }
 
-  getHeight = () => calc(this.photo.size.width, 1, CommonFractions.Eighth)
-
-  getWidth = () => calc(this.photo.size.height, CommonFractions.Eighth)
+  setUnits = (units: number) => {
+    this.dimensions.part1.units1 = units
+  }
 }

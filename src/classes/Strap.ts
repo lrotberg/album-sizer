@@ -8,13 +8,22 @@ export class Strap extends Opening {
   constructor(page: Page, photo: Photo) {
     super(page, photo)
     this.setName(words.StrapName)
+    this.setDimensions({
+      part1: {
+        height1: calc(this.page.size.height, 1, CommonFractions.Quarter),
+        width1: 2,
+        units1: 1
+      },
+      part2: {
+        height2: calc(this.photo.size.height, CommonFractions.Eighth),
+        width2: calc(this.photo.size.height, CommonFractions.Eighth),
+        units2: 1
+      },
+      part3: {
+        height3: calc(this.photo.size.height, CommonFractions.Eighth),
+        width3: calc(this.photo.size.height, CommonFractions.FiveEights),
+        units3: 1
+      }
+    })
   }
-
-  getHeight = () => calc(this.page.size.height, 1, CommonFractions.Quarter)
-  getHeightPart2 = () => calc(this.photo.size.height, CommonFractions.Eighth)
-  getHeightPart3 = () => calc(this.photo.size.height, CommonFractions.FiveEights)
-
-  getWidth = () => 2
-  getWidthPart2 = () => calc(this.photo.size.width, CommonFractions.Eighth)
-  getWidthPart3 = () => calc(this.photo.size.width, CommonFractions.Eighth)
 }
