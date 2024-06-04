@@ -4,6 +4,7 @@ const words = {
   "standardSize": "סטנדרטי (4X6)",
   "smallSize": "קטן (3.5X5)",
   "submit": "שלח",
+  "calculate": "חשב",
   "required": "שדה חובה",
   "pageSizeExplanation": "יש לכתוב מספר בין 4 ל 11, עבור שברים יש לכתוב ראשית את המספר השלום ואז רווח, ואז את השבר כולל '/', כמו בדוגמה",
   "height": "גובה",

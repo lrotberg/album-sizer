@@ -152,7 +152,7 @@ const MainForm = () => {
             </CheckboxGroup>
           </FormControl>
           <FormControl>
-            <Button type="submit">{words.submit}</Button>
+            <Button type="submit">{words.calculate}</Button>
           </FormControl>
         </VStack>
       </form>
