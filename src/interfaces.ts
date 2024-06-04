@@ -22,3 +22,21 @@ export interface MainFormData {
 export type PageOrientation = "horizontal" | "vertical";
 
 export type PhotoSize = "standard" | "small";
+
+export type Dimensions = {
+  part1: {
+    height1: number;
+    width1: number;
+    units1: number;
+  };
+  part2?: {
+    height2?: number;
+    width2?: number;
+    units2?: number;
+  };
+  part3?: {
+    height3?: number;
+    width3?: number;
+    units3?: number;
+  };
+};
