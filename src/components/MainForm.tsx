@@ -58,9 +58,9 @@ const MainForm = () => {
   };
 
   const onSubmit = (data: FieldValues) => {
-    const sizes = checkboxes.map(checkbox => {
+    const dimensions = checkboxes.map(checkbox => {
       const instance = sortedOpenings.find(opening => opening.name === checkbox)!.instance;
-      return { checkbox, height: instance.getHeight(), width: instance.getWidth() };
+      return { checkbox, dimensions: instance.getDimensions() };
     });
     console.log({
       data,
@@ -69,7 +69,7 @@ const MainForm = () => {
       imageSize: photo.size,
       pageSize: page.size,
       checkboxes,
-      sizes
+      dimensions
     });
   };
 
