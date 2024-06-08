@@ -1,18 +1,19 @@
 import { FormControl, FormErrorMessage, HStack, Radio, RadioGroup } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { MainFormData, PhotoSize } from "../interfaces";
 import words from "../words";
 import CustomFormLabel from "./CustomFormLabel";
 
 interface Props {
   setImageSize: (size: { size: { width: number; height: number } }) => void;
+  form: UseFormReturn<MainFormData>;
 }
 
-const PhotoSizeRadios = ({ setImageSize }: Props) => {
+const PhotoSizeRadios = ({ setImageSize, form }: Props) => {
   const {
     register,
     formState: { errors }
-  } = useForm<MainFormData>();
+  } = form;
 
   const handleImageSizeChange = (value: PhotoSize) => {
     if (value === "standard") {

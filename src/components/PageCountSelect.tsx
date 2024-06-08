@@ -1,19 +1,20 @@
 import { FormControl, FormErrorMessage, HStack, Select } from "@chakra-ui/react";
 import { ChangeEvent } from "react";
-import { useForm } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { MainFormData } from "../interfaces";
 import words from "../words";
 import CustomFormLabel from "./CustomFormLabel";
 
 interface Props {
   setPageCount: (value: number) => void;
+  form: UseFormReturn<MainFormData>;
 }
 
-const PageCountSelect = ({ setPageCount }: Props) => {
+const PageCountSelect = ({ setPageCount, form }: Props) => {
   const {
     register,
     formState: { errors }
-  } = useForm<MainFormData>();
+  } = form;
 
   const handlePageCountChange = (e: ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();

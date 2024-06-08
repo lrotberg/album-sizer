@@ -1,18 +1,19 @@
 import { FormControl, FormErrorMessage, HStack, Radio, RadioGroup } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { MainFormData, PageOrientation } from "../interfaces";
 import words from "../words";
 import CustomFormLabel from "./CustomFormLabel";
 
 interface Props {
   setOrientation: (value: PageOrientation) => void;
+  form: UseFormReturn<MainFormData>;
 }
 
-const OrientationRadios = ({ setOrientation }: Props) => {
+const OrientationRadios = ({ setOrientation, form }: Props) => {
   const {
     register,
     formState: { errors }
-  } = useForm<MainFormData>();
+  } = form;
 
   const handleOrientationChange = (value: PageOrientation) => {
     setOrientation(value);

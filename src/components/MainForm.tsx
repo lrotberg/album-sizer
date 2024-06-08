@@ -24,11 +24,8 @@ import PageCountSelect from "./PageCountSelect.tsx";
 import PhotoSizeRadios from "./PhotoSizeRadios";
 
 const MainForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<MainFormData>();
+  const form = useForm<MainFormData>();
+  const { handleSubmit } = form;
 
   const [pageCount, setPageCount] = useState<number>(2);
   const [photo, setPhoto] = useState<Photo>({ size: { width: 0, height: 0 } });
@@ -95,62 +92,9 @@ const MainForm = () => {
     <Box p={5}>
       <form onSubmit={handleSubmit(onSubmit)} className="object-center">
         <VStack>
-          <PhotoSizeRadios setImageSize={setPhoto} />
-          <PageCountSelect setPageCount={setPageCount} />
-          <OrientationRadios setOrientation={setOrientation} />
-          <FormControl
-            isInvalid={errors.height?.type === "required" || errors.width?.type === "required"}
-          >
-            <VStack align={"start"}>
-              <FormHelperText>{words.pageSizeExplanation}</FormHelperText>
-              <HStack>
-                <CustomFormLabel htmlFor="width" text={words.width} />
-                <Input
-                  id="width"
-                  {...setOrientationInput("width")}
-                  onChange={handlePageSizeChange}
-                />
-                {errors.width?.type === "required" && (
-                  <FormErrorMessage>{words.required}</FormErrorMessage>
-                )}
-              </HStack>
-              <HStack>
-                {orientation === "horizontal" ? (
-                  <Box h="80px" w="120px" bg={"gray.300"} border={"1px"} borderColor={"gray.400"} />
-                ) : (
-                  <Box h="120px" w="80px" bg={"gray.300"} border={"1px"} borderColor={"gray.400"} />
-                )}
-
-                <VStack justifyContent={"center"}>
-                  <CustomFormLabel htmlFor="height" text={words.height} />
-                  <Input
-                    id="height"
-                    {...setOrientationInput("height")}
-                    onChange={handlePageSizeChange}
-                  />
-                  {errors.height?.type === "required" && (
-                    <FormErrorMessage>{words.required}</FormErrorMessage>
-                  )}
-                </VStack>
-              </HStack>
-            </VStack>
-          </FormControl>
-          <FormControl>
-            <CheckboxGroup>
-              <SimpleGrid columns={5} spacing={3} my={2}>
-                {sortedOpenings.map(({ name, instance }) => (
-                  <Checkbox
-                    value={name}
-                    key={name}
-                    {...register("openings")}
-                    onChange={e => handleCheckboxChange(e, instance)}
-                  >
-                    {name}
-                  </Checkbox>
-                ))}
-              </SimpleGrid>
-            </CheckboxGroup>
-          </FormControl>
+          <PhotoSizeRadios form={form} setImageSize={setPhoto} />
+          <PageCountSelect form={form} setPageCount={setPageCount} />
+          <OrientationRadios form={form} setOrientation={setOrientation} />
           <FormControl>
             <Button type="submit">{words.calculate}</Button>
           </FormControl>
