@@ -1,26 +1,13 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  CheckboxGroup,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  HStack,
-  Input,
-  SimpleGrid,
-  VStack
-} from "@chakra-ui/react";
-import { ChangeEvent, useState } from "react";
+import { Box, Button, FormControl, VStack } from "@chakra-ui/react";
+import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import * as openings from "../classes";
-import Opening from "../classes/Opening";
-import { parseFloatFromFractionString } from "../helperFunctions";
 import { MainFormData, Page, PageOrientation, Photo } from "../interfaces";
 import words from "../words.ts";
-import CustomFormLabel from "./CustomFormLabel";
+import CheckboxGrid from "./CheckboxGrid.tsx";
 import OrientationRadios from "./OrientationRadios";
 import PageCountSelect from "./PageCountSelect.tsx";
+import PageDimensions from "./PageDimensions.tsx";
 import PhotoSizeRadios from "./PhotoSizeRadios";
 
 const MainForm = () => {
@@ -32,27 +19,6 @@ const MainForm = () => {
   const [page, setPage] = useState<Page>({ size: { width: 0, height: 0 } });
   const [orientation, setOrientation] = useState<PageOrientation>("horizontal");
   const [checkboxes, setCheckboxes] = useState<string[]>([]);
-
-  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>, instance: Opening) => {
-    if (e.target.checked) {
-      setCheckboxes([...checkboxes, instance.getName()]);
-    } else if (!e.target.checked) {
-      setCheckboxes(checkboxes.filter(checkbox => checkbox !== instance.getName()));
-    }
-  };
-
-  const handlePageSizeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-
-    const { name, value } = e.target;
-    const numberValue = parseFloatFromFractionString(value);
-
-    if (name === "height") {
-      setPage({ size: { width: page.size.width, height: numberValue } });
-    } else {
-      setPage({ size: { width: numberValue, height: page.size.height } });
-    }
-  };
 
   const onSubmit = (data: FieldValues) => {
     const dimensions = checkboxes.map(checkbox => {
@@ -68,15 +34,6 @@ const MainForm = () => {
       checkboxes,
       dimensions
     });
-  };
-
-  const setOrientationInput = (registerValue: "height" | "width") => {
-    return {
-      w: "80px",
-      dir: "ltr",
-      placeholder: "4 5/8",
-      ...register(registerValue, { min: 4, max: 11, required: true })
-    };
   };
 
   const sortedOpenings = Object.keys(openings)
@@ -95,6 +52,13 @@ const MainForm = () => {
           <PhotoSizeRadios form={form} setImageSize={setPhoto} />
           <PageCountSelect form={form} setPageCount={setPageCount} />
           <OrientationRadios form={form} setOrientation={setOrientation} />
+          <PageDimensions form={form} page={page} setPage={setPage} orientation={orientation} />
+          <CheckboxGrid
+            form={form}
+            checkboxes={checkboxes}
+            setCheckboxes={setCheckboxes}
+            sortedOpenings={sortedOpenings}
+          />
           <FormControl>
             <Button type="submit">{words.calculate}</Button>
           </FormControl>
