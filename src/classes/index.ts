@@ -1,6 +1,5 @@
 export * from './Accordion';
 export * from './Book';
-export * from './Closer';
 export * from './Cross';
 export * from './Door';
 export * from './DoubleBook';
@@ -18,3 +17,4 @@ export * from './SideEnvelope';
 export * from './SideWaterfall';
 export * from './Strap';
 export * from './Waterfall';
+
