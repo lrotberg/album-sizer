@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest';
 import { Accordion } from "../../src/classes/Accordion";
 import { CommonFractions } from '../../src/CommonFractions.enum';
 import { calc } from '../../src/helperFunctions';
