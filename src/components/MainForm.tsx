@@ -4,7 +4,6 @@ import { FieldValues, useForm } from "react-hook-form";
 import * as openings from "../classes";
 import { MainFormData, Page, PageOrientation, Photo } from "../interfaces";
 import words from "../words.ts";
-import CheckboxGrid from "./CheckboxGrid.tsx";
 import OrientationRadios from "./OrientationRadios";
 import PageCountSelect from "./PageCountSelect.tsx";
 import PageDimensions from "./PageDimensions.tsx";
@@ -53,12 +52,12 @@ const MainForm = () => {
           <PageCountSelect form={form} setPageCount={setPageCount} />
           <OrientationRadios form={form} setOrientation={setOrientation} />
           <PageDimensions form={form} page={page} setPage={setPage} orientation={orientation} />
-          <CheckboxGrid
+          {/* <CheckboxGrid
             form={form}
             checkboxes={checkboxes}
             setCheckboxes={setCheckboxes}
             sortedOpenings={sortedOpenings}
-          />
+          /> */}
           <FormControl>
             <Button type="submit">{words.calculate}</Button>
           </FormControl>
