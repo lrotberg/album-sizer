@@ -21,6 +21,8 @@ const words = {
   "BookName": "ספר",
   "DoubleBookName": "ספר כפול",
   "CloserName": "סוגר",
+  "DoorCloserName": "סוגר דלת",
+  "FullDoorCloserName": "סוגר דלת מלאה",
   "CrossName": "צלב",
   "DoorName": "דלת",
   "FullDoorName": "דלת מלאה",
@@ -31,7 +33,8 @@ const words = {
   "MixedName": "מעורב",
   "PulloutName": "נשלף",
   "ReverseName": "רוורס",
-  "StrapName": "רצועה"
+  "StrapName": "רצועה",
+  "AddCloser": "הוסף סוגר לדלת?",
 }
 
 export default words;
