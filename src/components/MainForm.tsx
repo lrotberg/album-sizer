@@ -4,6 +4,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import * as openings from "../classes";
 import { MainFormData, Page, PageOrientation, Photo } from "../interfaces";
 import words from "../words.ts";
+import { parseXml, xmlExample } from "../xmlParser.ts";
 import CheckboxGrid from "./CheckboxGrid.tsx";
 import OrientationRadios from "./OrientationRadios";
 import PageCountSelect from "./PageCountSelect.tsx";
@@ -20,11 +21,12 @@ const MainForm = () => {
   const [orientation, setOrientation] = useState<PageOrientation>("horizontal");
   const [checkboxes, setCheckboxes] = useState<string[]>([]);
 
-  const onSubmit = (data: FieldValues) => {
+  const onSubmit = async (data: FieldValues) => {
     const dimensions = checkboxes.map(checkbox => {
       const instance = sortedOpenings.find(opening => opening.name === checkbox)!.instance;
       return { checkbox, dimensions: instance.getDimensions() };
     });
+    parseXml(xmlExample);
     console.log({
       data,
       pageCount,
