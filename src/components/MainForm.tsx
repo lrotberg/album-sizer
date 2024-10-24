@@ -1,6 +1,7 @@
 import { Box, Button, FormControl, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
+import { z } from "zod";
 import * as openings from "../classes";
 import { MainFormData, Page, PageOrientation, Photo } from "../interfaces";
 import words from "../words.ts";
@@ -9,9 +10,19 @@ import OrientationRadios from "./OrientationRadios";
 import PageCountSelect from "./PageCountSelect.tsx";
 import PageDimensions from "./PageDimensions.tsx";
 import PhotoSizeRadios from "./PhotoSizeRadios";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const schema = z
+  .object({
+    height: z.number().int().min(4).max(11),
+    width: z.number().int().min(4).max(11),
+    imageSize: z.string(),
+    pageCount: z.number().int().min(2).max(20),
+  })
+  .required();
 
 const MainForm = () => {
-  const form = useForm<MainFormData>();
+  const form = useForm<MainFormData>({ resolver: zodResolver(schema) });
   const { handleSubmit } = form;
 
   const [pageCount, setPageCount] = useState<number>(2);
