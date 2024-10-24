@@ -45,8 +45,27 @@ const PageDimensions = ({ page, setPage, orientation, form }: Props) => {
       w: "80px",
       dir: "ltr",
       placeholder: "4 5/8",
-      ...register(registerValue, { min: 4, max: 11, required: true })
+      ...register(registerValue, {
+        required: words.required,
+        min: { value: 4, message: words.dimensionError },
+        max: { value: 11, message: words.dimensionError }
+      })
     };
+  };
+
+  const renderError = (field: "width" | "height") => {
+    if (!errors[field]) return null;
+
+    switch (errors[field].type) {
+      case "required":
+        return <FormErrorMessage>{words.required}</FormErrorMessage>;
+      case "min":
+        return <FormErrorMessage>{words.dimensionError}</FormErrorMessage>;
+      case "max":
+        return <FormErrorMessage>{words.dimensionError}</FormErrorMessage>;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -62,9 +81,7 @@ const PageDimensions = ({ page, setPage, orientation, form }: Props) => {
             {...setOrientationInput("width")}
             onChange={handlePageDimensionsChange}
           />
-          {errors.width?.type === "required" && (
-            <FormErrorMessage>{words.required}</FormErrorMessage>
-          )}
+          {renderError("width")}
         </HStack>
         <HStack>
           {orientation === "horizontal" ? (
@@ -80,9 +97,7 @@ const PageDimensions = ({ page, setPage, orientation, form }: Props) => {
               {...setOrientationInput("height")}
               onChange={handlePageDimensionsChange}
             />
-            {errors.height?.type === "required" && (
-              <FormErrorMessage>{words.required}</FormErrorMessage>
-            )}
+            {renderError("height")}
           </VStack>
         </HStack>
       </VStack>
