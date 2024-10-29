@@ -31,3 +31,27 @@ export const parseFloatFromFractionString = (fractionString: string): number => 
   const [nominator, denominator] = fraction.split("/")
   return parseFloat(whole) + parseFloat(nominator) / parseFloat(denominator)
 }
+
+export const blobToFile = (blob: Blob, fileName: string) => {
+  const b: any = blob;
+  b.lastModifiedDate = new Date();
+  b.name = fileName;
+
+  return b as File;
+};
+
+export const downloadBlob = (blob: Blob, fileName: string) => {
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.download = fileName;
+  link.href = url;
+  link.click();
+};
+
+export const downloadFile = (file: File) => {
+  const url = URL.createObjectURL(file);
+  const link = document.createElement("a");
+  link.download = file.name;
+  link.href = url;
+  link.click();
+}
