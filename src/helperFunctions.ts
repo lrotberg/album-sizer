@@ -25,6 +25,14 @@ export const createFraction = (fraction: number) => {
   }
 }
 
+export const createFractionString = (fraction: number) => {
+  const { top, bottom, wholeNumber } = createFraction(fraction)
+  let res = ""
+  if (wholeNumber > 0) res += `${wholeNumber}`
+  if (top > 0) res += ` ${top}/${bottom}`
+  return res
+}
+
 export const parseFloatFromFractionString = (fractionString: string): number => {
   const [whole, fraction] = fractionString.split(" ")
   if (!fraction) return parseFloat(whole)
