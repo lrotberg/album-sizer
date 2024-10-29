@@ -35,6 +35,7 @@ const words = {
   "ReverseName": "רוורס",
   "StrapName": "רצועה",
   "AddCloser": "הוסף סוגר לדלת?",
+  "downloadXml": "הורד קובץ XML",
 }
 
 export default words;

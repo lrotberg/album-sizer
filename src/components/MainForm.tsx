@@ -1,8 +1,8 @@
-import { downloadFile } from "@/helperFunctions.ts";
+import { createFractionString, downloadFile } from "@/helperFunctions";
 import { MainFormData, Page, PageOrientation, Photo } from "@/interfaces";
 import words from "@/words";
-import { buildXml, xmlObject } from "@/xmlHandler.ts";
-import { Box, Button, FormControl, VStack } from "@chakra-ui/react";
+import { addRow, buildXml, xmlDataType } from "@/xmlHandler.ts";
+import { Box, Button, FormControl, HStack, VStack } from "@chakra-ui/react";
 import * as openings from "@classes";
 import CheckboxGrid from "@components/CheckboxGrid";
 import OrientationRadios from "@components/OrientationRadios";
@@ -21,15 +21,15 @@ const MainForm = () => {
   const [page, setPage] = useState<Page>({ size: { width: 0, height: 0 } });
   const [orientation, setOrientation] = useState<PageOrientation>("horizontal");
   const [checkboxes, setCheckboxes] = useState<string[]>([]);
+  const [xml, setXml] = useState<string>("");
+  const [isCalculated, setIsCalculated] = useState<boolean>(false);
 
   const onSubmit = async (data: FieldValues) => {
     const dimensions = checkboxes.map(checkbox => {
       const instance = sortedOpenings.find(opening => opening.name === checkbox)!.instance;
       return { checkbox, dimensions: instance.getDimensions() };
     });
-    const xml = buildXml(xmlObject);
-    downloadFile(new File([xml], "output.xml", { type: "text/xml" }));
-    // downloadBlob(new Blob([xmlExample], { type: "text/xml" }), "output.xml");
+    calcXml();
     console.log({
       data,
       pageCount,
@@ -50,6 +50,14 @@ const MainForm = () => {
     })
     .sort((a, b) => a.name.localeCompare(b.name));
 
+  const calcXml = () => {
+    const xmlObj: xmlDataType = { data: { parts: { row: [] } } };
+    addRow(xmlObj, createFractionString(4), createFractionString(6.25), 1, "עמ1 פלאפ");
+    addRow(xmlObj, createFractionString(4), createFractionString(5), 1, "עמ2 דלת", true);
+    setXml(buildXml(xmlObj));
+    setIsCalculated(true);
+  };
+
   return (
     <Box p={5}>
       <form onSubmit={handleSubmit(onSubmit)} className="object-center">
@@ -65,7 +73,17 @@ const MainForm = () => {
             sortedOpenings={sortedOpenings}
           />
           <FormControl>
-            <Button type="submit">{words.calculate}</Button>
+            <HStack>
+              <Button type="submit">{words.calculate}</Button>
+              {isCalculated && (
+                <Button
+                  ms={2}
+                  onClick={() => downloadFile(new File([xml], "output.xml", { type: "text/xml" }))}
+                >
+                  {words.downloadXml}
+                </Button>
+              )}
+            </HStack>
           </FormControl>
         </VStack>
       </form>
