@@ -37,15 +37,46 @@ export const xmlExample =
   </parts>
 </data>`
 
-export const parseXml = (xml: string) => {
-  // const xml2jsParser = new xml2js.Parser();
-  xml2js.parseString(xml, (err, result) => {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log(result);
-      const file = new File([xml], 'xmlExample.xml', { type: 'text/xml' });
-      file.text().then(text => console.log(text));
+
+
+export const xmlObject = {
+  data: {
+    parts: {
+      row: {
+        length: 0,
+        width: 0,
+        quantity: 1,
+        grain: 0,
+        allow_rotation: -1,
+        label: '',
+        material: '',
+        customer: '',
+        edge_band: {
+          top_name: '',
+          top_thick: 0,
+          left_name: '',
+          left_thick: 0,
+          bottom_name: '',
+          bottom_thick: 0,
+          right_name: '',
+          right_thick: 0
+        },
+        grinding: {
+          top_thick: 0,
+          left_thick: 0,
+          bottom_thick: 0,
+          right_thick: 0
+        },
+        color: 16777215,
+        id: -1,
+        use_it: 1,
+        utilized_in_optimization: 0
+      }
     }
-  });
+  }
+}
+
+export const buildXml = (data: any) => {
+  const builder = new xml2js.Builder();
+  return builder.buildObject(data);
 }
