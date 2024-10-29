@@ -1,6 +1,6 @@
 import { Grid, GridItem } from "@chakra-ui/react";
-import "./App.css";
-import MainForm from "./components/MainForm";
+import "@/App.css";
+import MainForm from "@components/MainForm";
 
 function App() {
   // const { top, bottom, wholeNumber } = createFraction(5.6144);

@@ -1,3 +1,6 @@
+import { parseFloatFromFractionString } from "@/helperFunctions";
+import { MainFormData, Page } from "@/interfaces";
+import words from "@/words";
 import {
   Box,
   FormControl,
@@ -7,12 +10,9 @@ import {
   Input,
   VStack
 } from "@chakra-ui/react";
+import CustomFormLabel from "@components/CustomFormLabel";
 import { ChangeEvent } from "react";
 import { UseFormReturn } from "react-hook-form";
-import { parseFloatFromFractionString } from "../helperFunctions";
-import { MainFormData, Page } from "../interfaces";
-import words from "../words";
-import CustomFormLabel from "./CustomFormLabel";
 
 interface Props {
   setPage: (value: Page) => void;

@@ -1,8 +1,8 @@
-import { CommonFractions } from "../CommonFractions.enum"
-import { calc } from "../helperFunctions"
-import { Page, Photo } from "../interfaces"
-import words from "../words"
-import { Flap } from "./Flap"
+import { CommonFractions } from "@/CommonFractions.enum"
+import { calc } from "@/helperFunctions"
+import { Page, Photo } from "@/interfaces"
+import words from "@/words"
+import { Flap } from "@classes/Flap"
 
 export class Mixed extends Flap {
   constructor(page: Page, photo: Photo) {

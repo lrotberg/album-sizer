@@ -1,9 +1,9 @@
+import { MainFormData } from "@/interfaces";
+import words from "@/words";
 import { Checkbox, CheckboxGroup, FormControl, FormHelperText, SimpleGrid } from "@chakra-ui/react";
+import Opening from "@classes/Opening";
 import { ChangeEvent, useState } from "react";
 import { UseFormReturn } from "react-hook-form";
-import Opening from "../classes/Opening";
-import { MainFormData } from "../interfaces";
-import words from "../words";
 
 interface Props {
   form: UseFormReturn<MainFormData>;

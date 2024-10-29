@@ -1,9 +1,9 @@
+import { MainFormData } from "@/interfaces";
+import words from "@/words";
 import { FormControl, FormErrorMessage, HStack, Select } from "@chakra-ui/react";
+import CustomFormLabel from "@components/CustomFormLabel";
 import { ChangeEvent } from "react";
 import { UseFormReturn } from "react-hook-form";
-import { MainFormData } from "../interfaces";
-import words from "../words";
-import CustomFormLabel from "./CustomFormLabel";
 
 interface Props {
   setPageCount: (value: number) => void;

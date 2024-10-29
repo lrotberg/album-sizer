@@ -23,7 +23,31 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@": [
+        "./src"
+      ],
+      "@/*": [
+        "./src/*"
+      ],
+      "@tests": [
+        "./tests"
+      ],
+      "@components": [
+        "./src/components"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@classes": [
+        "./src/classes"
+      ],
+      "@classes/*": [
+        "./src/classes/*"
+      ],
+    }
   },
   "include": [
     "src",

@@ -1,6 +1,6 @@
-import { Page, Photo } from "../interfaces";
-import words from "../words";
-import { Flap } from "./Flap";
+import { Page, Photo } from "@/interfaces";
+import words from "@/words";
+import { Flap } from "@classes/Flap";
 
 export class Accordion extends Flap {
   constructor(page: Page, photo: Photo) {

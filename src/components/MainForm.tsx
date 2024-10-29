@@ -1,16 +1,16 @@
+import { downloadFile } from "@/helperFunctions.ts";
+import { MainFormData, Page, PageOrientation, Photo } from "@/interfaces";
+import words from "@/words";
+import { buildXml, xmlObject } from "@/xmlHandler.ts";
 import { Box, Button, FormControl, VStack } from "@chakra-ui/react";
+import * as openings from "@classes";
+import CheckboxGrid from "@components/CheckboxGrid";
+import OrientationRadios from "@components/OrientationRadios";
+import PageCountSelect from "@components/PageCountSelect.tsx";
+import PageDimensions from "@components/PageDimensions.tsx";
+import PhotoSizeRadios from "@components/PhotoSizeRadios";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import * as openings from "../classes";
-import { downloadFile } from "../helperFunctions.ts";
-import { MainFormData, Page, PageOrientation, Photo } from "../interfaces";
-import words from "../words.ts";
-import { buildXml, xmlObject } from "../xmlHandler.ts";
-import CheckboxGrid from "./CheckboxGrid.tsx";
-import OrientationRadios from "./OrientationRadios";
-import PageCountSelect from "./PageCountSelect.tsx";
-import PageDimensions from "./PageDimensions.tsx";
-import PhotoSizeRadios from "./PhotoSizeRadios";
 
 const MainForm = () => {
   const form = useForm<MainFormData>();

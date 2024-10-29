@@ -1,8 +1,8 @@
+import { MainFormData, PageOrientation } from "@/interfaces";
+import words from "@/words";
 import { FormControl, FormErrorMessage, HStack, Radio, RadioGroup } from "@chakra-ui/react";
+import CustomFormLabel from "@components/CustomFormLabel";
 import { UseFormReturn } from "react-hook-form";
-import { MainFormData, PageOrientation } from "../interfaces";
-import words from "../words";
-import CustomFormLabel from "./CustomFormLabel";
 
 interface Props {
   setOrientation: (value: PageOrientation) => void;

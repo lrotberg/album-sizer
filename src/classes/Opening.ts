@@ -1,4 +1,4 @@
-import { Dimensions, Page, Photo } from "../interfaces";
+import { Dimensions, Page, Photo } from "@/interfaces";
 
 export default abstract class Opening {
   page: Page;

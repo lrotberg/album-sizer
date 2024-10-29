@@ -1,9 +1,9 @@
+import { CommonFractions } from '@/CommonFractions.enum';
+import { calc } from '@/helperFunctions';
+import { Page, Photo } from '@/interfaces';
+import words from '@/words';
+import { Strap } from '@classes/Strap';
 import { describe, expect, it } from 'vitest';
-import { Strap } from '../../src/classes/Strap';
-import { CommonFractions } from '../../src/CommonFractions.enum';
-import { calc } from '../../src/helperFunctions';
-import { Page, Photo } from '../../src/interfaces';
-import words from '../../src/words';
 
 describe('Strap', () => {
   it('should set the name and dimensions correctly in the constructor', () => {

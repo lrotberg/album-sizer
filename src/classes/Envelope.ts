@@ -1,8 +1,8 @@
-import { CommonFractions } from "../CommonFractions.enum"
-import { calc } from "../helperFunctions"
-import { Page, Photo } from "../interfaces"
-import words from "../words"
-import Opening from "./Opening"
+import { CommonFractions } from "@/CommonFractions.enum"
+import { calc } from "@/helperFunctions"
+import { Page, Photo } from "@/interfaces"
+import words from "@/words"
+import Opening from "@classes/Opening"
 
 export class Envelope extends Opening {
   constructor(page: Page, photo: Photo) {

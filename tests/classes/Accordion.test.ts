@@ -1,8 +1,8 @@
-import { Accordion } from "../../src/classes/Accordion";
-import { CommonFractions } from '../../src/CommonFractions.enum';
-import { calc } from '../../src/helperFunctions';
-import { Page, Photo } from "../../src/interfaces";
-import words from "../../src/words";
+import { CommonFractions } from '@/CommonFractions.enum';
+import { calc } from '@/helperFunctions';
+import { Page, Photo } from "@/interfaces";
+import words from "@/words";
+import { Accordion } from "@classes/Accordion";
 
 describe("Accordion", () => {
   it("should set the name and dimensions correctly in the constructor", () => {

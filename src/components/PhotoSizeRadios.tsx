@@ -1,8 +1,8 @@
+import { MainFormData, PhotoSize } from "@/interfaces";
+import words from "@/words";
 import { FormControl, FormErrorMessage, HStack, Radio, RadioGroup } from "@chakra-ui/react";
+import CustomFormLabel from "@components/CustomFormLabel";
 import { UseFormReturn } from "react-hook-form";
-import { MainFormData, PhotoSize } from "../interfaces";
-import words from "../words";
-import CustomFormLabel from "./CustomFormLabel";
 
 interface Props {
   setImageSize: (size: { size: { width: number; height: number } }) => void;

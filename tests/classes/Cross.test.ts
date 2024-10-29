@@ -1,9 +1,9 @@
+import { CommonFractions } from '@/CommonFractions.enum';
+import { calc } from '@/helperFunctions';
+import { Page, Photo } from '@/interfaces';
+import words from '@/words';
+import { Cross } from '@classes/Cross';
 import { describe, expect, it } from 'vitest';
-import { Cross } from '../../src/classes/Cross';
-import { CommonFractions } from '../../src/CommonFractions.enum';
-import { calc } from '../../src/helperFunctions';
-import { Page, Photo } from '../../src/interfaces';
-import words from '../../src/words';
 
 describe('Cross', () => {
   it('should set the name and dimensions correctly in the constructor', () => {
