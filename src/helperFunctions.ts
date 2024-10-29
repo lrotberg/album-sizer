@@ -33,7 +33,7 @@ export const parseFloatFromFractionString = (fractionString: string): number => 
 }
 
 export const blobToFile = (blob: Blob, fileName: string) => {
-  const b: any = blob;
+  const b: Blob & { lastModifiedDate?: Date; name?: string } = blob;
   b.lastModifiedDate = new Date();
   b.name = fileName;
 
