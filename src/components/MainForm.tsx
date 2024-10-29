@@ -2,8 +2,10 @@ import { Box, Button, FormControl, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import * as openings from "../classes";
+import { downloadFile } from "../helperFunctions.ts";
 import { MainFormData, Page, PageOrientation, Photo } from "../interfaces";
 import words from "../words.ts";
+import { buildXml, xmlObject } from "../xmlHandler.ts";
 import CheckboxGrid from "./CheckboxGrid.tsx";
 import OrientationRadios from "./OrientationRadios";
 import PageCountSelect from "./PageCountSelect.tsx";
@@ -20,11 +22,14 @@ const MainForm = () => {
   const [orientation, setOrientation] = useState<PageOrientation>("horizontal");
   const [checkboxes, setCheckboxes] = useState<string[]>([]);
 
-  const onSubmit = (data: FieldValues) => {
+  const onSubmit = async (data: FieldValues) => {
     const dimensions = checkboxes.map(checkbox => {
       const instance = sortedOpenings.find(opening => opening.name === checkbox)!.instance;
       return { checkbox, dimensions: instance.getDimensions() };
     });
+    const xml = buildXml(xmlObject);
+    downloadFile(new File([xml], "output.xml", { type: "text/xml" }));
+    // downloadBlob(new Blob([xmlExample], { type: "text/xml" }), "output.xml");
     console.log({
       data,
       pageCount,
